@@ -5,6 +5,10 @@ const checkoutModal = document.querySelector('.checkout-modal')
 const checkoutCart = document.querySelector('.checkout__cart')
 const checkoutCartTotalPrice = document.querySelector('.checkout__cart__total__price')
 
+let checkoutCartHTML = ''
+const totalPriceArr = []
+const itemsArr = []
+
 document.addEventListener('click', function(e){
 
     e.target.className==='main__item__btn' && handleAddMainItemBtn(e.target.dataset.item)
@@ -16,10 +20,20 @@ document.addEventListener('click', function(e){
     e.target.className==='checkout-modal__container' && closeModal()
 
     e.target.id==='checkout-pay-btn' && handleCheckoutPayBtn(e)
+
+    e.target.dataset.substract && handleSubstractItem(e.target.dataset.substract)
+
+    
     
 })
 
+function handleSubstractItem(itemId){
+    
+    itemsArr.filter(function(item){
+        return item === itemId
+    })
 
+}
 
 function closeModal(){
     checkoutModal.style.display = "none"
@@ -32,12 +46,6 @@ function handleCompleteOrderBtn(){
 function handleRemoveItem(itemId){
     checkout.style.display = "none"
 }
-
-
-
-let checkoutCartHTML = ''
-const totalPriceArr = []
-const itemsArr = []
 
 function handleAddMainItemBtn(itemId){
     checkout.style.display = "flex"
@@ -55,16 +63,33 @@ function getCartItemsHTML(itemId){
     const { name, price, id} = itemsData.filter(function(item){
         return item.id===Number(itemId)
     })[0]
-   
-    checkoutCartHTML += `
+
+    const index = itemsArr.findIndex(item => item.id === id)
+
+    if(index !== -1){
+        itemsArr[index].quantity++
+        console.log(itemsArr[index].quantity)
+        document.querySelector('.checkout__cart__item__quantity__value').textContent = itemsArr[index].quantity
+        console.log(itemsArr[index].quantity)
+    }else{
+        totalPriceArr.push(price)
+        itemsArr.push({
+            id,
+            quantity: 1
+        })
+        checkoutCartHTML += `
         <div class="checkout__cart__item">
             <h2 class="checkout__cart__item__name">${name}</h2>
-            <a class="checkout__cart__item__remove-btn">remove</a>
-            <p class="checkout__cart__item__price">$${price}</p>
+            <div class="checkout__cart__item__quantity">
+                <button class="checkout__cart__item__quantity__subtract btn btn--small" data-substract=${id}>-</button>
+                <p class="checkout__cart__item__quantity__value">1</p>
+                <button class="checkout__cart__item__quantity__add btn btn--small" data-add=${id}>+</button>
+            </div>
+            <p class="checkout__cart__item__price ">$${price}</p>
         </div>`
+    }
 
-    itemsArr.push(id)
-    totalPriceArr.push(price)
+    
 
     return checkoutCartHTML
 
