@@ -1,0 +1,216 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Smythe';
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header {
+    background-image: url("../img/header.png");
+    background-size: cover;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 45px;
+}
+
+.header__title,
+.header__subtitle {
+    margin: 0;
+    color: white;
+    font-size: 39px;
+}
+
+.header__title {
+    font-size: 39px;
+}
+
+.header__subtitle {
+    font-size: 22px;
+}
+
+.main {
+    margin-top: 50px;
+}
+
+.main__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #D2D2D2;
+}
+
+.main__item__img {
+    order: -1;
+    font-size: 100px;
+    margin-right: 30px;
+}
+
+.main__item__product-info {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.main__item__product-info__name {
+    font-size: 28px;
+}
+
+
+.main__item__product-info__ingredients {
+    color: #8B8B8B;
+    font-size: 16px;
+    margin-top: auto;
+}
+
+
+.main__item__product-info__price {
+    font-size: 20px;
+}
+
+.main__item__btn {
+    margin-left: auto;
+    border-radius: 50%;
+    background-color: white;
+    border: 1.5px solid #DEDEDE;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.checkout {
+    display: none;
+    flex-direction: column;
+}
+
+.checkout__title {
+    margin: 30px;
+    font-size: 28px;
+    text-align: center;
+}
+
+.checkout__cart {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout__cart__item {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.checkout__cart__item__name {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.checkout__cart__item__remove-btn {
+    font-size: 12px;
+    color: #BBB;
+    font-family: Verdana, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+.checkout__cart__item__price {
+    font-size: 20px;
+    margin-left: auto;
+}
+
+.checkout__cart__total {
+    margin-top: 20px;
+    border-top: 3px solid black;
+}
+
+.checkout__cart__total {
+    display: flex;
+}
+
+.checkout__cart__total__title {
+    font-size: 28px;
+}
+
+.checkout__cart__total__price {
+    margin-left: auto;
+    font-size: 20px;
+}
+
+.btn {
+    background-color: #16DB99;
+    padding: 20px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    font-family: Verdana, Tahoma, sans-serif;
+    margin: 20px 0 50px;
+    cursor: pointer;
+}
+
+.btn--bigger {
+    padding: 30px;
+    font-size: 20px;
+}
+
+.checkout-modal {
+    background-color: rgb(0, 0, 0, 0.3);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.checkout-modal__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.checkout-modal__container__box {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    height: 500px;
+    width: 80%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.checkout-modal__container__box__header__title {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+}
+
+.checkout-modal__container__box__header__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-modal__container__box__header__form__input {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.order-completed {
+    margin-top: 35px;
+    padding: 40px;
+    background-color: #ECFDF5;
+    text-align: center;
+    color: #065F46;
+    display: none;
+
+}

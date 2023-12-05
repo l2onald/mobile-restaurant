@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Restaurant</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+    <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap"   rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="header__title">Jimmy's Dinner</h1>
+        <p class="header__subtitle">The best burgers and pizzas in town.</p>
+    </header>
+    
+    <div class="container">
+
+        <section class="main"></section>
+
+        <div class="checkout">
+            <h2 class="checkout__title">Your order</h2>
+            <div class="checkout__cart">
+            </div>
+            <button class="btn" id="complete-order-btn">Complete order</button>
+        </div>
+
+        <div class="checkout-modal">
+            <div class="checkout-modal__container">
+                <div class="checkout-modal__container__box">
+                    <div class="checkout-modal__container__box__header">
+                        <h1 class="checkout-modal__container__box__header__title">Enter card details</h1>
+                    </div>
+                    <form class="checkout-modal__container__box__header__form" action="#">
+                        <input type="text" class="checkout-modal__container__box__header__form__input" placeholder="Enter your name" name="name" id="checkout-name" required>
+                        <input type="text" class="checkout-modal__container__box__header__form__input" placeholder="Enter card number" required>
+                        <input type="text" class="checkout-modal__container__box__header__form__input" placeholder="Enter CVV" required>
+
+                        <button class="btn btn--bigger" id="checkout-pay-btn">Pay</button>
+                    </form>
+                </div>
+            </div>
+        </div> <!--Checkout Modal-->
+
+        <div class="order-completed">
+            <h1 class="order-completed__text"></h1>
+        </div>
+
+    </div>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
