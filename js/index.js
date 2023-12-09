@@ -21,19 +21,30 @@ document.addEventListener('click', function(e){
 
     e.target.id==='checkout-pay-btn' && handleCheckoutPayBtn(e)
 
-    e.target.dataset.substract && handleSubstractItem(e.target.dataset.substract)
+    e.target.dataset.decrease && handleDecreaseItemBtn(e.target.dataset.decrease)
+
+    e.target.dataset.increase && handleIncreaseItemBtn(e.target.dataset.increase)
 
     
     
 })
 
-function handleSubstractItem(itemId){
-    
-    itemsArr.filter(function(item){
-        return item === itemId
-    })
+
+function handleIncreaseItemBtn(itemId){
+
+    const selectedItem = itemsArr.find(item => item.id == itemId);
+
+    selectedItem && selectedItem.quantity++;
+    document.getElementById(itemId).textContent = selectedItem.quantity;
 
 }
+
+function handleDecreaseItemBtn(itemId){
+    const selectedItem = itemsArr.find(item => item.id == itemId);
+    selectedItem.quantity <= 1 || selectedItem.quantity--
+    document.getElementById(itemId).textContent = selectedItem.quantity;
+}
+
 
 function closeModal(){
     checkoutModal.style.display = "none"
@@ -43,7 +54,7 @@ function handleCompleteOrderBtn(){
     checkoutModal.style.display = "block"
 }
 
-function handleRemoveItem(itemId){
+function handleRemoveItem(){
     checkout.style.display = "none"
 }
 
@@ -54,9 +65,11 @@ function handleAddMainItemBtn(itemId){
         return total + current
     })
     checkoutCartTotalPrice.textContent = `$ ${totalPrice}`
+
+    handleIncreaseItemBtn(itemId)
+
 }
 
-checkoutCartHTML = ``
 
 function getCartItemsHTML(itemId){
 
@@ -64,32 +77,30 @@ function getCartItemsHTML(itemId){
         return item.id===Number(itemId)
     })[0]
 
-    const index = itemsArr.findIndex(item => item.id === id)
+    const index = itemsArr.findIndex(item => item.id == id)
+    
 
     if(index !== -1){
-        itemsArr[index].quantity++
-        console.log(itemsArr[index].quantity)
-        document.querySelector('.checkout__cart__item__quantity__value').textContent = itemsArr[index].quantity
-        console.log(itemsArr[index].quantity)
+        const quantityElement = document.getElementById(id);
+        quantityElement.textContent = itemsArr[index].quantity;
     }else{
         totalPriceArr.push(price)
         itemsArr.push({
             id,
-            quantity: 1
+            quantity: 0
         })
         checkoutCartHTML += `
         <div class="checkout__cart__item">
             <h2 class="checkout__cart__item__name">${name}</h2>
             <div class="checkout__cart__item__quantity">
-                <button class="checkout__cart__item__quantity__subtract btn btn--small" data-substract=${id}>-</button>
-                <p class="checkout__cart__item__quantity__value">1</p>
-                <button class="checkout__cart__item__quantity__add btn btn--small" data-add=${id}>+</button>
+                <button class="checkout__cart__item__quantity__subtract btn btn--small" data-decrease=${id}>-</button>
+                <p class="checkout__cart__item__quantity__value" id=${id}></p>
+                <button class="checkout__cart__item__quantity__increase btn btn--small" data-increase=${id}>+</button>
             </div>
             <p class="checkout__cart__item__price ">$${price}</p>
         </div>`
+        
     }
-
-    
 
     return checkoutCartHTML
 
